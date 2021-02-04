@@ -1,3 +1,21 @@
+# Greenroom Notes
+
+This has been modified to build a base container for GreenVision projects. This image contains:
+
+* Python 3.8
+* OpenCv
+* PyTorch 1.7
+* Numpy
+
+## Usage
+
+* Pull this repo on a Jetson / Xavier
+* Enable docker experimental mode.` sudo nano /etc/docker/daemon.json`
+* Add `{ "experimental": true }`
+* Build the docker image `./scripts/docker_build_greenvision.sh`
+* Login to dockerhub
+* Push the image to dockerhub
+
 # Machine Learning Containers for Jetson and JetPack
 
 Hosted on [NVIDIA GPU Cloud](https://ngc.nvidia.com/catalog/containers?orderBy=modifiedDESC&query=L4T&quickFilter=containers&filters=) (NGC) are the following Docker container images for machine learning on Jetson:
