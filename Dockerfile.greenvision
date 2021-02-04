@@ -80,6 +80,7 @@ RUN rm -rf /usr/bin/python3 && \
     ln -s /usr/bin/python3.8 /usr/bin/python3
 
 # Install poetry and its deps
+RUN apt-get update && apt-get install -y libssl-dev libffi-dev
 RUN pip3 install cryptography
 RUN pip3 install 'poetry==1.1.4'
 
