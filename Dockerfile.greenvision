@@ -17,8 +17,8 @@ RUN apt-get update && \
 RUN add-apt-repository ppa:deadsnakes/ppa
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-        python3.8-dev \
-        python3-pip \
+    python3.8-dev \
+    python3-pip \
 		build-essential \
 		gfortran \
 		git \
@@ -33,14 +33,14 @@ RUN apt-get update && \
 		zip \
 		libjpeg8-dev \
 		libopenmpi2 \
-        openmpi-bin \
-        openmpi-common \
+    openmpi-bin \
+    openmpi-common \
 		nodejs \
 		npm \
 		protobuf-compiler \
-        libprotoc-dev \
+    libprotoc-dev \
 		llvm-9 \
-        llvm-9-dev \
+    llvm-9-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Use the latest python and pip
@@ -72,6 +72,16 @@ RUN echo "$L4T_APT_SOURCE" > /etc/apt/sources.list.d/nvidia-l4t-apt-source.list 
 
 # Cleanup pytorch src
 RUN rm -rf ./pytorch
+
+# Use the latest python and pip
+# This should be combined with the other step like this
+# but I don't want to wait for pytorch to rebuild
+RUN rm -rf /usr/bin/python3 && \
+    ln -s /usr/bin/python3.8 /usr/bin/python3
+
+# Install poetry and its deps
+RUN pip3 install cryptography
+RUN pip3 install 'poetry==1.1.4'
 
 RUN apt-get purge -y \
 		build-essential \
