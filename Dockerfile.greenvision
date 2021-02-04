@@ -83,9 +83,9 @@ RUN rm -rf /usr/bin/python3 && \
 RUN apt-get update && apt-get install -y libssl-dev libffi-dev
 RUN pip3 install cryptography
 RUN pip3 install 'poetry==1.1.4'
+RUN python -m pip install --upgrade pip
 
 RUN apt-get purge -y \
-		build-essential \
 		gfortran \
 		git \
 		cmake \
