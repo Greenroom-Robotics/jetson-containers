@@ -78,23 +78,11 @@ RUN apt-get purge -y \
 		gfortran \
 		git \
 		cmake \
-		libopenblas-dev \
-		liblapack-dev \
-		libblas-dev \
-		libhdf5-serial-dev \
-		hdf5-tools \
-		libhdf5-dev \
-		zlib1g-dev \
-		zip \
-		libjpeg8-dev \
-		libopenmpi2 \
-        openmpi-bin \
-        openmpi-common \
+    openmpi-bin \
+    openmpi-common \
 		nodejs \
 		npm \
 		protobuf-compiler \
-        libprotoc-dev \
-		llvm-9 \
-        llvm-9-dev \
+    libprotoc-dev \
     && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
