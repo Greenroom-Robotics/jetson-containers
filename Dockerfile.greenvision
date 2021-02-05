@@ -82,18 +82,18 @@ RUN rm -rf /usr/bin/python3 && \
 # Install poetry and its deps
 RUN apt-get update && apt-get install -y libssl-dev libffi-dev
 RUN pip3 install cryptography
-RUN pip3 install 'poetry==1.1.4'
 RUN python -m pip install --upgrade pip
+RUN pip3 install --ignore-installed 'poetry==1.1.4'
 
 RUN apt-get purge -y \
-		gfortran \
-		git \
-		cmake \
-    openmpi-bin \
-    openmpi-common \
-		nodejs \
-		npm \
-		protobuf-compiler \
-    libprotoc-dev \
-    && apt-get autoremove -y \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+	gfortran \
+	git \
+	cmake \
+	openmpi-bin \
+	openmpi-common \
+	nodejs \
+	npm \
+	protobuf-compiler \
+	libprotoc-dev \
+	&& apt-get autoremove -y \
+	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
