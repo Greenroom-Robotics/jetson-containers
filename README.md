@@ -10,8 +10,21 @@ This has been modified to build a base container for GreenVision projects. This 
 ## Usage
 
 * Pull this repo on a Jetson / Xavier
-* Enable docker experimental mode.` sudo nano /etc/docker/daemon.json`
-* Add `{ "experimental": true }`
+* Enable docker experimental mode. And add nvidia as the default runtime:` sudo nano /etc/docker/daemon.json`
+
+```json
+{
+    "experimental": true,
+    "runtimes": {
+        "nvidia": {
+            "path": "nvidia-container-runtime",
+            "runtimeArgs": []
+        }
+    },
+    "default-runtime": "nvidia" 
+}
+```
+
 * Build the docker image `./scripts/docker_build_greenvision.sh`
 * Login to dockerhub
 * Push the image to dockerhub
