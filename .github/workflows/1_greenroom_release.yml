@@ -1,0 +1,43 @@
+name: 1_greenroom_release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: true
+      matrix:
+        job:
+          - runner: 4vcpu-ubuntu-2404-arm
+            arch: 64
+
+    name: Build - ${{ matrix.job.arch }}
+    runs-on: ${{ matrix.job.runner }}
+    permissions:
+        contents: read
+        packages: write
+        id-token: write
+
+    steps:
+      - name: Docker Login
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+
+      - name: Checkout this repository
+        uses: actions/checkout@v4
+
+      - name: Install jetson-containers
+        run: ./install.sh
+
+      - name: Build greenroom
+        run: CUDA_VERSION=12.8 LSB_RELEASE=24.04 ./build.sh --base=dustynv/onnxruntime:1.22-r36.4.0-cu128-24.04 --name=ghcr.io/greenroom-robotics/onnxruntime:1.22-r36.4.0-cu128-24.04-cv2 opencv
+
+      - name: Push image to ghcr
+        run: docker push ghcr.io/greenroom-robotics/onnxruntime:1.22-r36.4.0-cu128-24.04-cv2
+
+ 
